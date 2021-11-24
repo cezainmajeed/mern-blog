@@ -1,17 +1,27 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Home from "./home/Home"
+import DetailView from "./detail/DetailView";
+import CreatePost from "./create/CreatePost";
+import Update from "./create/Update";
+
 import {Box} from "@material-ui/core"
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 
 function App(){
   return (
-    <div>
+    <BrowserRouter>
     <NavBar/>
-    <Box style={{marginTop:64}}> 
-    <Home/>
+    <Box style={{marginTop:64}}>
+    <Routes>
+         <Route exact path="/" element={<Home/>}/>
+         <Route exact path="/detail" element={<DetailView/>}/>
+         <Route exact path="/create" element={<CreatePost/>}/>
+         <Route exact path="/update" element={<Update/>}/>
+    </Routes>
     </Box>
-    </div>
+    </BrowserRouter>
   );
 }
 
