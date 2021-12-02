@@ -16,7 +16,7 @@ function App(){
     <Box style={{marginTop:64}}>
     <Routes>
          <Route exact path="/" element={<Home/>}/>
-         <Route exact path="/detail" element={<DetailView/>}/>
+         <Route exact path="/detail/:id" element={<DetailView/>}/>
          <Route exact path="/create" element={<CreatePost/>}/>
          <Route exact path="/update" element={<Update/>}/>
     </Routes>

@@ -1,7 +1,10 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import {Box,makeStyles,Typography} from "@material-ui/core";
 import {Edit,Delete} from "@material-ui/icons";
-import {Link} from "react-router-dom";
+import {Link,useParams} from "react-router-dom";
+
+import {getPost} from "../../service/api";
+
 
 const useStyles=makeStyles((theme)=>({
   container:{
@@ -45,12 +48,29 @@ const useStyles=makeStyles((theme)=>({
   }
 }))
 
-function DetailView(){
+const DetailView = () => {
+  //Then inside your component
+  const { id } = useParams();
   const classes=useStyles();
   const url="https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
+  const [post,setPost]=useState({});
+
+
+  useEffect(() => {
+        const fetchData = async () => {
+            let data = await getPost(id);
+            //console.log(data);
+            setPost(data);
+        }
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+
+
+
   return (
     <Box className={classes.container}>
-    <img className={classes.image} src={url} alt="banner" />
+    <img className={classes.image} src={post.image || url} alt="banner" />
     <Box className={classes.icons}>
     <Link to={"/update"} className={classes.link}>
     <Edit className={classes.icon} color="primary"/>
@@ -58,11 +78,11 @@ function DetailView(){
     <Delete className={classes.icon} color="error"/>
     </Box>
     <Box className={classes.subHeading}>
-    <Typography>Author : <span style={{fontWeight:600}}>Cezain Majeed</span></Typography>
-    <Typography>24 November 2021</Typography>
+    <Typography>Author : <span style={{fontWeight:600}}>{post.username}</span></Typography>
+    <Typography>{new Date(post.createDate).toDateString()}</Typography>
     </Box>
-    <Typography className={classes.title}>Title of the Blog</Typography>
-    <Typography>This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.This is the blog from Cezain Majeed.</Typography>
+    <Typography className={classes.title}>{post.title}</Typography>
+    <Typography>{post.description}</Typography>
     </Box>
   );
 }

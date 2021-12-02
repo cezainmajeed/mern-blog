@@ -40,16 +40,16 @@ const useStyles=makeStyles({
   }
 })
 
-function Post(){
+function Post({post}){
   const classes=useStyles();
-  const url="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80";
+  const url= post.image || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80";
   return (
     <Box className={classes.container}>
     <img src={url} alt="wrapper" className={classes.image}/>
-    <Typography className={classes.category}>Data Structures & Algorithms</Typography>
-    <Typography className={classes.title}>LRU Cache</Typography>
-    <Typography className={classes.author}>Author:Cezain Majeed</Typography>
-    <Typography className={classes.desc}>A LRU Cache organizes items in order of use, allowing you to quickly identify which item hasn't been used for the longest amount of time. </Typography>
+    <Typography className={classes.category}>{post.category}</Typography>
+    <Typography className={classes.title}>{post.title}</Typography>
+    <Typography className={classes.author}>Author : {post.username}</Typography>
+    <Typography className={classes.desc}>{post.description}</Typography>
     </Box>
   );
 }
