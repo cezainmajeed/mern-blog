@@ -16,7 +16,7 @@ const useStyles=makeStyles({
   }
 })
 
-function Categories(){
+const Categories=()=>{
   const classes=useStyles();
   return (
     <>
@@ -27,13 +27,21 @@ function Categories(){
     <Table>
     <TableHead>
     <TableRow>
-    <TableCell>All Categories</TableCell>
+    <TableCell>
+    <Link to={'/'} className={classes.links}>
+    All Categories
+    </Link>
+    </TableCell>
     </TableRow>
     </TableHead>
     <TableBody>
     {categories.map(category=>(
       <TableRow>
-      <TableCell>{category}</TableCell>
+      <TableCell>
+      <Link to={`/?category=${category}`} className={classes.links}>
+      {category}
+      </Link>
+      </TableCell>
       </TableRow>
     ))}
     </TableBody>

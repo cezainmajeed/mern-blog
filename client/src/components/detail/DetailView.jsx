@@ -1,9 +1,9 @@
 import {React,useEffect,useState} from "react";
 import {Box,makeStyles,Typography} from "@material-ui/core";
 import {Edit,Delete} from "@material-ui/icons";
-import {Link,useParams} from "react-router-dom";
+import {Link,useParams,useNavigate} from "react-router-dom";
 
-import {getPost} from "../../service/api";
+import {getPost,deletePost} from "../../service/api";
 
 
 const useStyles=makeStyles((theme)=>({
@@ -54,6 +54,7 @@ const DetailView = () => {
   const classes=useStyles();
   const url="https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
   const [post,setPost]=useState({});
+  const navigate=useNavigate();
 
 
   useEffect(() => {
@@ -66,19 +67,26 @@ const DetailView = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
+    const deleteBlog= async ()=>{
+      await deletePost(post._id);
+      navigate("/");
+    }
+
 
 
   return (
     <Box className={classes.container}>
     <img className={classes.image} src={post.image || url} alt="banner" />
     <Box className={classes.icons}>
-    <Link to={"/update"} className={classes.link}>
+    <Link to={`/update/${post._id}`} className={classes.link}>
     <Edit className={classes.icon} color="primary"/>
     </Link>
-    <Delete className={classes.icon} color="error"/>
+    <Delete onClick={()=>deleteBlog()} className={classes.icon} color="error"/>
     </Box>
     <Box className={classes.subHeading}>
+    <Link to={`/?username=${post.username}`} className={classes.link}>
     <Typography>Author : <span style={{fontWeight:600}}>{post.username}</span></Typography>
+    </Link>
     <Typography>{new Date(post.createDate).toDateString()}</Typography>
     </Box>
     <Typography className={classes.title}>{post.title}</Typography>
