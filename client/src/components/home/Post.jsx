@@ -26,7 +26,8 @@ const useStyles=makeStyles({
   },
   title:{
     fontSize:18,
-    fontWeight:600
+    fontWeight:600,
+    textAlign:"center"
   },
   author:{
     color:"#636363",
@@ -35,8 +36,6 @@ const useStyles=makeStyles({
   desc:{
     fontSize:14,
     wordBreak:"break-word",
-    marginLeft:5,
-    marginRight:5
   }
 })
 

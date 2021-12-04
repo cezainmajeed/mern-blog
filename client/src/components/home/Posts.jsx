@@ -17,7 +17,7 @@ function Posts(){
     }
     fetchdata();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  },[posts]);
 
 
   return (

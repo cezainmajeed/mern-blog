@@ -41,7 +41,7 @@ export const getPost = async(req,res)=> {
 export const updatePost = async(req,res)=>{
   try {
     const post=await new Post(req.body);
-    const updatedPost= await Post.findOneAndUpdate({_id:post._id},{$set:{title:post.title,description:post.description}},{upsert:true});
+    const updatedPost= await Post.findOneAndUpdate({_id:post._id},{$set:{title:post.title,description:post.description,image:post.image}},{upsert:true});
     res.status(200).json("Blog Updated Successfully");
   } catch(error) {
     res.status(500).json(error);

@@ -17,6 +17,7 @@ const useStyles=makeStyles({
 })
 
 const Categories=()=>{
+
   const classes=useStyles();
   return (
     <>

@@ -43,3 +43,11 @@ export const deletePost = async(id)=>{
     console.log("Error while calling deletePost API",error);
   }
 }
+
+export const uploadFile= async(data)=>{
+  try{
+    return await axios.post(`${URL}/file/upload`,data);
+  } catch(error) {
+    console.log("Error while calling uploadFile API",error);
+  }
+}
